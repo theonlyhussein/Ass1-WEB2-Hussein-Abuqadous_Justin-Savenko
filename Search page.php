@@ -9,11 +9,15 @@ require_once('config.inc.php');
     <meta charset=utf-8>
 </head>
 <body>
-    <form action="/action_page.php" method="get">
+    <section>
+    <form action="/Browse_Search Results Page.php" method="get">
+        <div id="title">
         <label>Title</label> 
         <input type="text"  name="Title" > <br>
+        </div>
+        <div id="artist">
         <label> Artist </label>
-        <select name="artist">
+        <select name="artist" >
             <option value='0'> Select Artist</option>
             <?php 
                 try{
@@ -35,6 +39,8 @@ require_once('config.inc.php');
                 
             ?>
         </select>
+        </div>
+        <div id="genre">
         <label> Genre </label>
         <select name="genre">
             <option value='0'>Select Genre</option> 
@@ -57,15 +63,19 @@ require_once('config.inc.php');
                 }
             ?>
         </select> <br>
-        <label> Year</label><br>
+        </div>
+        <div id="year">
+        <label> Year</label> <br>
         <label>Less</label> <input type="text" size="4" maxlength="4"  name="less_Year"> <br>
         <label>Greater</label> <input type ="text" size="4" maxlength="4"  name="Greater_Year"> <br>
+        </div>
+        <div id="popularity">
         <label> Popularity </label> <br>
         <label> Less </label> <input type ="text" size="4"  name="Less_Popularity"> <br>
         <label>Greater</label> <input type ="text" size="4"  name="Greater_Popularity"> <br>
-        
+        </div>
         <button type="button"> Search </button>
-
+        </section>
     </form>
 
 
