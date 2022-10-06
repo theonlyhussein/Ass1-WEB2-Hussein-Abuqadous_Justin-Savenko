@@ -9,9 +9,9 @@ require_once('config.inc.php');
     <meta charset=utf-8>
 </head>
 <body>
-    <form action="/action_page.php" method="get">
+    <form action="Browse_Search Results Page.php" method="get">
         <label>Title</label> 
-        <input type="text" > <br>
+        <input type="text" name ="" > <br>
         <label> Artist </label>
         <select name="artist">
             <option value='0'> Select Artist</option>
