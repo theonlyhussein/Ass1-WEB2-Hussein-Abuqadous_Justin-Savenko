@@ -64,7 +64,7 @@ require_once('config.inc.php');
         <label> Less </label> <input type ="text" size="4"  name="Less_Popularity"> <br>
         <label>Greater</label> <input type ="text" size="4" name="Greater_Popularity"> <br>
         
-        <button type="button"> Search </button>
+        <input type="submit" value="Search" >
 
     </form>
 
