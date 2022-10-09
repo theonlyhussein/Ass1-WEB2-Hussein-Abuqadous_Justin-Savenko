@@ -10,7 +10,7 @@ try {
     $songsGateway = new SingleSongViewDB($conn);
     $songs = $songsGateway->getAll();
     $song_id = defaultSONG_id;
-    if(isset($_GET['song_id']) && $_GET['song_id'] > 1000 && $_GET['song_id'] < 1319)
+    if(isset($_GET['song_id']) && $_GET['song_id'] > 1000 && $_GET['song_id'] < 1318)
         $song_id = $_GET['song_id'];
 }catch (Exception $e) { die($e->getMessage());}
 
@@ -26,7 +26,8 @@ try {
     </head>
 <body>
     <main>
-        <?php echo $song_id;?>
+        <?php
+        $row = $songs[$song_id - defaultSONG_id];?>
     </main>
 <footer class="ui black inverted segment">
   <div class="ui container">COMP 3512 Fall 2022</div>
