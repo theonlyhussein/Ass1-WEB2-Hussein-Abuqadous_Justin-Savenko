@@ -9,7 +9,7 @@ require_once('config.inc.php');
     <meta charset=utf-8>
 </head>
 <body>
-    <form action="Search_Results_and_browsePage" method="get">
+    <form action="Search_Results_and_browsePage.php" method="get">
         <label>Title</label> 
         <input type="text" name ="title"> <br>
         <label> Artist </label>

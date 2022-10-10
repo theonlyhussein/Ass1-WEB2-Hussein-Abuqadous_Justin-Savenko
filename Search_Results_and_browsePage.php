@@ -1,7 +1,7 @@
 <?php 
     require_once('config.inc.php');    
     if (isset($_GET ["title"]) ){
-        echo $_GET ["title"];
+       echo $_GET ["title"];
       $title = findbytitle($_GET["title"]);
       output($title);
     }
@@ -9,11 +9,11 @@
         try{
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id 
-                    AND  title LIKE '%$songtitle%'";
+                    AND  title LIKE ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1, '%' . $songtitle . '%'); 
             $statement->execute();
@@ -26,7 +26,7 @@
         }
         }
         
-   /* if(isset($_GET['artist'] )  ){
+   if(isset($_GET['artist'] )  ){
         $artist = findbyartist($_GET['artist']);
         output($artist);
     }
@@ -35,8 +35,11 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
-                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE artist_name LIKE '%$artist%'";
+            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+                    FROM artists, songs, genres  
+                    WHERE  songs.genre_id = genres.genre_id 
+                    AND songs.artist_id = artists.artist_id 
+                    AND  artist_name LIKE ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1, '%' . $artist . '%'); 
             $statement->execute();
@@ -60,8 +63,11 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
-                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE genre_name LIKE '%$genre%'";
+            $sql = "SELECT title, artist_name, year, genre_name, popularity
+                    FROM artists, songs, genres  
+                    WHERE  songs.genre_id = genres.genre_id 
+                    AND songs.artist_id = artists.artist_id  
+                    AND  genre_name LIKE ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1, '%' . $genre . '%'); 
             $statement->execute();
@@ -85,8 +91,11 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
-                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE year <= '%$$less_year%'";
+            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+                    FROM artists, songs, genres  
+                    WHERE  songs.genre_id = genres.genre_id 
+                    AND songs.artist_id = artists.artist_id 
+                    AND year <= ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1, '%' . $less_year . '%'); 
             $statement->execute();
@@ -110,8 +119,11 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
-                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE year >= '%$$greater_year%'";
+            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+                    FROM artists, songs, genres  
+                    WHERE  songs.genre_id = genres.genre_id 
+                    AND songs.artist_id = artists.artist_id 
+                    AND  year >= ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1, '%' . $greater_year . '%'); 
             $statement->execute();
@@ -135,8 +147,11 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
-                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE popularity <= '%$$less_popularity%'";
+            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+                    FROM artists, songs, genres  
+                    WHERE  songs.genre_id = genres.genre_id 
+                    AND songs.artist_id = artists.artist_id 
+                    AND popularity <= ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1, '%' . $less_popularity . '%'); 
             $statement->execute();
@@ -159,8 +174,11 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
-                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE popularity >= '%$$greaterpopularity%'";
+            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+                    FROM artists, songs, genres  
+                    WHERE  songs.genre_id = genres.genre_id 
+                    AND songs.artist_id = artists.artist_id 
+                    AND popularity >= ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1, '%' . $greaterpopularity . '%'); 
             $statement->execute();
@@ -172,7 +190,7 @@
             die($e->getMessage()); 
     
         } 
-    } */
+    } 
 ?>
 <!DOCTYPE html>
 <html lang=en>
