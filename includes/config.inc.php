@@ -5,4 +5,5 @@ define('DBUSER', 'root');
 define('DBPASS', '');
 define('DBCONNSTRING','sqlite:./data/music.db');
 //define('DBCONNSTRING',"mysql:host=" . DBHOST . ";dbname=" . DBNAME . ";charset=utf8mb4;");
+define('defaultSONG_id', 1001)
 ?>
