@@ -110,16 +110,96 @@ require_once('config.inc.php');
         } 
     }
     function findbylessyear($less_year){
-
+        try{
+            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
+            PDO::ERRMODE_EXCEPTION); 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
+                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE year <= '%$$less_year%'";
+            $statement = $pdo->prepare($sql); 
+            $statement->bindValue(1, '%' . $less_year . '%'); 
+            $statement->execute();
+            $result = $pdo->query($sql); 
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
+            foreach ($data as $row) { 
+                echo $row['title'] . ", ". $row['artist_name']. ", ". $row['year']. ", ". $row['genre_name']. ", ". $row['popularity']; 
+                
+            } 
+            $pdo = null;
+        }
+        catch(PDOException $e){
+            die($e->getMessage()); 
+    
+        } 
     }
     function findbygreateryear($greater_year){
-
+        try{
+            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
+            PDO::ERRMODE_EXCEPTION); 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
+                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE year >= '%$$greater_year%'";
+            $statement = $pdo->prepare($sql); 
+            $statement->bindValue(1, '%' . $greater_year . '%'); 
+            $statement->execute();
+            $result = $pdo->query($sql); 
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
+            foreach ($data as $row) { 
+                echo $row['title'] . ", ". $row['artist_name']. ", ". $row['year']. ", ". $row['genre_name']. ", ". $row['popularity']; 
+                
+            } 
+            $pdo = null;
+        }
+        catch(PDOException $e){
+            die($e->getMessage()); 
+    
+        } 
     }
     function findbylesspopularity($less_popularity){
-
+        try{
+            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
+            PDO::ERRMODE_EXCEPTION); 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
+                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE popularity <= '%$$less_popularity%'";
+            $statement = $pdo->prepare($sql); 
+            $statement->bindValue(1, '%' . $less_popularity . '%'); 
+            $statement->execute();
+            $result = $pdo->query($sql); 
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
+            foreach ($data as $row) { 
+                echo $row['title'] . ", ". $row['artist_name']. ", ". $row['year']. ", ". $row['genre_name']. ", ". $row['popularity']; 
+                
+            } 
+            $pdo = null;
+        }
+        catch(PDOException $e){
+            die($e->getMessage()); 
+    
+        } 
     }
     function findbygreaterpopularity($greaterpopularity){
-
+        try{
+            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
+            PDO::ERRMODE_EXCEPTION); 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity FROM artists  JOIN  songs ON  songs.artist_id = artists.artist_id
+                    JOIN genres  ON  songs.genre_id = genres.genre_id WHERE popularity >= '%$$greaterpopularity%'";
+            $statement = $pdo->prepare($sql); 
+            $statement->bindValue(1, '%' . $greaterpopularity . '%'); 
+            $statement->execute();
+            $result = $pdo->query($sql); 
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
+            foreach ($data as $row) { 
+                echo $row['title'] . ", ". $row['artist_name']. ", ". $row['year']. ", ". $row['genre_name']. ", ". $row['popularity']; 
+                
+            } 
+            $pdo = null;
+        }
+        catch(PDOException $e){
+            die($e->getMessage()); 
+    
+        } 
     }
 
     ?>
