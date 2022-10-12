@@ -1,4 +1,5 @@
-<?php 
+<?php
+    session_start();
     require_once('config.inc.php');    
     if (isset($_GET ["title"]) && $_GET["artist"]==0 
         && $_GET["genre"] ==0 && empty($_GET["less_Year"]) 
