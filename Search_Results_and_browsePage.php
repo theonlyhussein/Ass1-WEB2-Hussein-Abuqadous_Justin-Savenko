@@ -30,11 +30,11 @@
     if(isset($_GET["artist"]) && empty($_GET["less_Year"]) 
         && empty($_GET["Greater_Year"]) && empty($_GET["Less_Popularity"]) 
         && empty($_GET["Greater_Popularity"]) && empty($_GET ["title"]) && $_GET["genre"] ==0){
-
-     echo $_GET["artist"];                                                                                  
+     echo $_GET["artist"];
+        if (is_numeric($_GET["artist"])) {
         $artist = findbyartist($_GET["artist"]);
         output($artist);
-        
+        }
     }
     function findbyartist ($artist){
         try{
@@ -63,10 +63,11 @@
     if(isset($_GET["genre"]) && $_GET["artist"]==0  && empty($_GET["less_Year"]) 
          && empty($_GET["Greater_Year"]) && empty($_GET["Less_Popularity"]) 
         && empty($_GET["Greater_Popularity"]) && empty($_GET ["title"])){
-            
+            if (is_numeric($_GET["genre"])) {
+                echo $_GET["genre"];
             $genre =  findbygenre($_GET["genre"]);
             output($genre );
-            
+            }
     }
     function findbygenre($genre){
         try{
