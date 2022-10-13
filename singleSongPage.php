@@ -38,7 +38,7 @@ try {
         <div class="container">
   <div class="card">
     <div class="box">
-      <div class="percent" style="--num:<?php echo $row['bpm']?>;">
+      <div class="percent" style="--clr: #00ff43; --num:<?php echo $row['bpm']?>;">
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
           <circle cx="70" cy="70" r="70"></circle>
@@ -54,7 +54,7 @@ try {
 <div class="container">
   <div class="card">
     <div class="box">
-      <div class="percent" style="--num:<?php echo $row['energy']?>;">
+      <div class="percent" style="--clr: #ed6c02; --num:<?php echo $row['energy']?>;">
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
           <circle cx="70" cy="70" r="70"></circle>
@@ -70,7 +70,7 @@ try {
 <div class="container">
   <div class="card">
     <div class="box">
-      <div class="percent" style="--num:<?php echo $row['danceability']?>;">
+      <div class="percent" style="--clr: #0f6fbd; --num:<?php echo $row['danceability']?>;">
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
           <circle cx="70" cy="70" r="70"></circle>
@@ -86,7 +86,7 @@ try {
 <div class="container">
   <div class="card">
     <div class="box">
-      <div class="percent" style="--num:<?php echo $row['liveness']?>;">
+      <div class="percent" style="--clr: #9805b5; --num:<?php echo $row['liveness']?>;">
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
           <circle cx="70" cy="70" r="70"></circle>
@@ -102,7 +102,7 @@ try {
 <div class="container">
   <div class="card">
     <div class="box">
-      <div class="percent" style="--num:<?php echo $row['valence']?>;">
+      <div class="percent" style="--clr: #1d05f5; --num:<?php echo $row['valence']?>;">
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
           <circle cx="70" cy="70" r="70"></circle>
@@ -118,7 +118,7 @@ try {
 <div class="container">
   <div class="card">
     <div class="box">
-      <div class="percent" style="--num:<?php echo $row['acousticness']?>;">
+      <div class="percent" style="--clr: #05f59d; --num:<?php echo $row['acousticness']?>;">
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
           <circle cx="70" cy="70" r="70"></circle>
@@ -134,7 +134,7 @@ try {
 <div class="container">
   <div class="card">
     <div class="box">
-      <div class="percent" style="--num:<?php echo $row['speechiness']?>;">
+      <div class="percent" style="--clr: #9fc40a; --num:<?php echo $row['speechiness']?>;">
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
           <circle cx="70" cy="70" r="70"></circle>
@@ -150,7 +150,7 @@ try {
 <div class="container">
   <div class="card">
     <div class="box">
-      <div class="percent" style="--num:<?php echo $row['popularity']?>;">
+      <div class="percent" style="--clr: #f7051d; --num:<?php echo $row['popularity']?>;">
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
           <circle cx="70" cy="70" r="70"></circle>
