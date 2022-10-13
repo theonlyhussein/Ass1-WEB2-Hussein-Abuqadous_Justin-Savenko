@@ -23,9 +23,9 @@ require_once('config.inc.php');
                     $result = $pdo->query($sql);
                     $data = $result->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($data as $row) { 
-                        echo '<option value="' . $row['artist_id'] . '">'; 
-                        echo utf8_encode($row['artist_name']); 
-                        echo "</option>"; 
+                        echo '<option value="' . $row["artist_id"] . '">'; 
+                        echo utf8_encode($row["artist_name"]); 
+                        echo '</option>'; 
                     } 
                     $pdo = null;
                 }
@@ -45,8 +45,8 @@ require_once('config.inc.php');
                     $result = $pdo->query($sql);
                     $data = $result->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($data as $row) { 
-                        echo '<option value="' . $row['genre_id'] . '">'; 
-                        echo utf8_encode($row['genre_name']); 
+                        echo '<option value="' . $row["genre_id"] . '">'; 
+                        echo utf8_encode($row["genre_name"]); 
                         echo "</option>"; 
                     } 
                     $pdo = null;
@@ -63,7 +63,7 @@ require_once('config.inc.php');
         <label> Less </label> <input type ="text" size="4"  name="Less_Popularity"> <br>
         <label>Greater</label> <input type ="text" size="4" name="Greater_Popularity"> <br>
         
-        <input type="submit" value="Search" >
+        <input type="submit" name="search" value="Search" >
 
     </form>
 
