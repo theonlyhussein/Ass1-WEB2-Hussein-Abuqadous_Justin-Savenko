@@ -92,7 +92,7 @@ try {
           <circle cx="70" cy="70" r="70"></circle>
           <svg>
             <div class="num">
-              <h2>86<span>%</span></h2>
+              <h2><?php echo $row['liveness']?><span>%</span></h2>
             </div>
       </div>
           <h2 class="text">Liveness</h2>
