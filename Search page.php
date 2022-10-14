@@ -14,12 +14,12 @@ require_once('config.inc.php');
         <input type="text" name ="title"> <br>
         <label> Artist </label>
         <select name="artist">
-            <option value='0'> Select Artist</option>
+            <option value="0"> Select Artist</option>
             <?php 
                 try{
                     $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $sql="select artist_name from artists";
+                    $sql="select artist_name, artist_id from artists";
                     $result = $pdo->query($sql);
                     $data = $result->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($data as $row) { 
@@ -41,7 +41,7 @@ require_once('config.inc.php');
                 try { 
                     $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $sql="select genre_name from genres";
+                    $sql="select genre_name,genre_id from genres";
                     $result = $pdo->query($sql);
                     $data = $result->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($data as $row) { 

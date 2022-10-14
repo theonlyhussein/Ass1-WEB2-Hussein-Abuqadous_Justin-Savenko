@@ -1,3 +1,13 @@
+
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <title>Search Results</title>
+    <meta charset=utf-8>
+    <link rel="stylesheet" href="./css/Search_Results_andbrowsePage.css">
+</head>
+<body>
+<h1>Search Results</h1>
 <?php
     session_start();
     require_once('config.inc.php'); 
@@ -16,7 +26,6 @@
     elseif(isset($_GET["artist"]) && empty($_GET["less_Year"]) 
         && empty($_GET["Greater_Year"]) && empty($_GET["Less_Popularity"]) 
         && empty($_GET["Greater_Popularity"]) && empty($_GET ["title"]) && $_GET["genre"] =="0"){
-     echo "fucking work";
         if (is_numeric($_GET["artist"])) {
         $artist = findbyartist(intval($_GET["artist"]));
         output($artist);
@@ -26,15 +35,13 @@
          && empty($_GET["Greater_Year"]) && empty($_GET["Less_Popularity"]) 
         && empty($_GET["Greater_Popularity"]) && empty($_GET ["title"])){
             if (is_numeric($_GET["genre"])) {
-                echo $_GET["genre"];
-            $genre =  findbygenre($_GET["genre"]);
+            $genre =  findbygenre(intval($_GET["genre"]));
             output($genre );
             }
     }
     else if(isset($_GET["less_Year"])&& empty($_GET["Greater_Year"]) && $_GET["artist"]=="0"
     && empty($_GET["Less_Popularity"])  && empty($_GET["Greater_Popularity"]) 
-    && empty($_GET ["title"])  && $_GET["genre"] =="0" ){
-        echo $_GET["less_Year"]; 
+    && empty($_GET ["title"])  && $_GET["genre"] =="0" ){ 
     if (is_numeric($_GET["less_Year"])) {
         $less_year = intval($_GET["less_Year"]);
         output(findbylessyear($less_year)) ;
@@ -73,7 +80,7 @@
         try{
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity
+            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id 
@@ -92,18 +99,17 @@
         
     
     function findbyartist ($artist){
-        echo $artist;
         try{
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id 
-                    AND  artist_name LIKE ?";
+                    AND  artists.artist_id = ?";
             $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1, '%' . $artist . '%'); 
+            $statement->bindValue(1,  $artist ); 
             $statement->execute();
             $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
            
@@ -122,13 +128,13 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity
+            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id  
-                    AND  genre_name LIKE ?";
+                    AND  genres.genre_id =  ?";
             $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1, '%' . $genre . '%'); 
+            $statement->bindValue(1,  $genre ); 
             $statement->execute();
             $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
             $pdo = null;
@@ -144,13 +150,13 @@
         try{
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id 
-                    AND year <= ?";
+                    AND year < ?";
             $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1, '%' . $less_year . '%'); 
+            $statement->bindValue(1,  $less_year ); 
             $statement->execute();
             $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
             $pdo = null;
@@ -167,13 +173,13 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id 
-                    AND  year >= ?";
+                    AND  year > ?";
             $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1, '%' . $greater_year . '%'); 
+            $statement->bindValue(1,  $greater_year ); 
             $statement->execute();
             $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
             $pdo = null;
@@ -190,13 +196,13 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id 
-                    AND popularity <= ?";
+                    AND popularity < ?";
             $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1, '%' . $less_popularity . '%'); 
+            $statement->bindValue(1,  $less_popularity ); 
             $statement->execute();
             $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
             $pdo = null;
@@ -213,13 +219,13 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity 
+            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id 
-                    AND popularity >= ?";
+                    AND popularity > ?";
             $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1, '%' . $greaterpopularity . '%'); 
+            $statement->bindValue(1,  $greaterpopularity ); 
             $statement->execute();
             $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
             $pdo = null;
@@ -232,32 +238,17 @@
     }
 
 ?>
-<!DOCTYPE html>
-<html lang=en>
-<head>
-    <title>Search Results</title>
-    <meta charset=utf-8>
-</head>
-<body>
-    
-    <?php
-    function output($data){
-         foreach ($data as $row) { 
-            echo $row['title'] . ", ". $row['artist_name']. ", ". $row['year']. ", ". $row['genre_name']. ", ". $row['popularity']."</br>";      
-        } 
-    }
-    ?>
-    <?php 
+<?php 
     if (!isset($_GET["search"])) {
-        echo '<form method="post">';
-        echo '<input type="submit" name="showall"value="Show All">';
+        echo '<form  method="post">';
+        echo '<input id="showall" type="submit" name="showall"value="Show All">';
         echo '</form>';
 
             if(isset($_POST["showall"])){
             try{ 
                     $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $sql = "SELECT title, artist_name, year, genre_name, popularity 
+                    $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
                     FROM artists, songs, genres  
                     WHERE  songs.genre_id = genres.genre_id 
                     AND songs.artist_id = artists.artist_id";
@@ -274,5 +265,36 @@
         
     }
     ?>
+    <br>
+    <?php
+    function output($data){
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>Title</th>";
+    echo "<th class='artist'>Artist</th>";
+    echo "<th class='year'>Year</th>";
+    echo "<th class='genre'>Genre</th>";
+    echo "<th class='popularity'>Populartiy</th>";
+    echo"<th> </th>";
+    echo"<th>  </th>";
+    echo "</tr>";
+    foreach ($data as $row) { 
+           echo "<tr>";
+           echo "<td id='title'>".$row['title']."</td>";
+           echo "<td class='artist'>".$row['artist_name']."</td>";
+           echo "<td class='year'>".$row['year']."</td>";
+           echo "<td class='genre'>".$row['genre_name']."</td>";
+           echo "<td class='popularity'>".$row['popularity']."</td>";
+           echo "<td class='favorites'> <a href=' viewFavourites.php?songid=<?=". $row['song_id']. "?>' > Add to Favorites   </td>";
+           echo "<td class='favorites'> <a href=' singleSongPage.php?songid=". $row['song_id']. "' > View  </td>";
+           echo "</tr>";
+    }
+    echo "</table>";
+    }
+  
+    
+    ?>
+    
+   
 </body>
 </html>

@@ -1,0 +1,56 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin-left:auto; 
+    margin-right:auto;
+  }
+  body{
+    background-color: black;
+    color: white;
+  }
+  td, th {
+    border: none;
+    text-align: left;
+    padding: 8px;
+  }
+  .genre{
+    padding-right: 70px;
+    padding-left: 50px;
+  }
+  .year{
+    padding-left: 100px;
+  }
+  .artist{
+    padding-left: 50px;
+  }
+ .favorites a{
+    color:white;
+ }
+ h1{
+    text-align: center;
+ }
+input{
+    margin: auto;
+    display: block;
+    margin-bottom: 100px; 
+}
+a {
+    text-decoration: none;
+    border-style:  solid red;
+    padding-top: 10px;
+    padding-bottom: 10px ;
+    padding-right:50px;
+    padding-left: 50px;
+    margin-bottom: 10px;
+    color: black;
+}
+tr{
+    margin: 50px;
+}
+a:active{
+background-color: white;
+color:black;
+}
+
+
+  
