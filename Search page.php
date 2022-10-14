@@ -7,13 +7,16 @@ require_once('config.inc.php');
 <head>
     <title>Song Website Search page</title>
     <meta charset=utf-8>
+    <link rel="stylesheet" href="./css/searchpage.css">
+    <p class="subtitle" align="right">Hussein Abuqadous & Justin Savenko</p>
 </head>
 <body>
+    <h1>Song Search</h1>
     <form action="Search_Results_and_browsePage.php" method="get">
-        <label>Title</label> 
-        <input type="text" name ="title"> <br>
-        <label> Artist </label>
-        <select name="artist">
+        <label id="labeltitle">Title</label> 
+        <input type="text" name ="title" id="title">
+        <label class="labelartist"> Artist </label>
+        <select name="artist" id="aritst">
             <option value="0"> Select Artist</option>
             <?php 
                 try{
@@ -34,8 +37,8 @@ require_once('config.inc.php');
                 }   
             ?>
         </select>
-        <label> Genre </label>
-        <select name="genre">
+        <label class="labelartist"> Genre </label>
+        <select  name="genre" id="genre">
             <option value='0'>Select Genre</option> 
             <?php  
                 try { 
@@ -56,17 +59,28 @@ require_once('config.inc.php');
                 }
             ?>
         </select> <br>
-        <label> Year</label><br>
-        <label>Less</label> <input type="text" size="4" maxlength="4"  name="less_Year"> <br>
-        <label>Greater</label> <input type ="text" size="4" maxlength="4"  name="Greater_Year"> <br>
-        <label> Popularity </label> <br>
-        <label> Less </label> <input type ="text" size="4"  name="Less_Popularity"> <br>
-        <label>Greater</label> <input type ="text" size="4" name="Greater_Popularity"> <br>
-        
-        <input type="submit" name="search" value="Search" >
+        <section class="container">
+        <div>
+        <label class="year"> Year</label><br>
+        <label class="year">Less</label> <input type="text" size="4" maxlength="4"  name="less_Year" id="less_Year"> <br>
+        <label class="year">Greater</label> <input type ="text" size="4" maxlength="4"  name="Greater_Year" id="greater_Year"> 
+        </div>
+        <div>
+        <label class="Popularity"> Popularity </label> <br>
+        <label class="Popularity"> Less </label> <input type ="text" size="4"  name="Less_Popularity" id="Less_Popularity"> <br>
+        <label class="Popularity">Greater</label> <input type ="text" size="4" name="Greater_Popularity" id="Greater_Popularity"> <br>
+        </div>
+        </section>
+        <input  type="submit" name="search" value="Search" >
 
     </form>
-
+    <footer>
+  <div>COMP 3512 Fall 2022</div>
+  <div>Hussein Abuqadous & Justin Savenko &#169</div>
+  <div><a href ="https://github.com/theonlyhussein/Ass1-WEB2-Hussein-Abuqadous_Justin-Savenko">Github Repo</a></div>
+  <div><a href ="https://github.com/theonlyhussein">Hussein Github</a></div>
+  <div><a href ="https://github.com/Jsavy">Justin Github</a></div>
+</footer>
 
 </body>
 
