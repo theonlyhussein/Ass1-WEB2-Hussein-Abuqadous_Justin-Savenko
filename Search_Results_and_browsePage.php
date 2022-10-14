@@ -2,11 +2,15 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <title>Search Results</title>
+    <title>COMP 3512 Assign1-Search Results</title>
     <meta charset=utf-8>
+    <p class="subtitle" align="right">Hussein Abuqadous & Justin Savenko</p>
     <link rel="stylesheet" href="./css/Search_Results_andbrowsePage.css">
 </head>
 <body>
+<section>
+    
+</section>
 <h1>Search Results</h1>
 <?php
     session_start();
@@ -285,8 +289,8 @@
            echo "<td class='year'>".$row['year']."</td>";
            echo "<td class='genre'>".$row['genre_name']."</td>";
            echo "<td class='popularity'>".$row['popularity']."</td>";
-           echo "<td class='favorites'> <a href=' viewFavourites.php?songid=<?=". $row['song_id']. "?>' > Add to Favorites   </td>";
-           echo "<td class='favorites'> <a href=' singleSongPage.php?songid=". $row['song_id']. "' > View  </td>";
+           echo "<td class='favorites'> <a href=' viewFavourites.php?song_id=<?=". $row['song_id']. "?>' > Add to Favorites   </td>";
+           echo "<td class='favorites'> <a href=' singleSongPage.php?song_id=". $row['song_id']. "' > View  </td>";
            echo "</tr>";
     }
     echo "</table>";
@@ -295,6 +299,12 @@
     
     ?>
     
-   
+    <footer>
+  <div>COMP 3512 Fall 2022</div>
+  <div>Hussein Abuqadous & Justin Savenko &#169</div>
+  <div><a href ="https://github.com/theonlyhussein/Ass1-WEB2-Hussein-Abuqadous_Justin-Savenko">Github Repo</a></div>
+  <div><a href ="https://github.com/theonlyhussein">Hussein Github</a></div>
+  <div><a href ="https://github.com/Jsavy">Justin Github</a></div>
+</footer>
 </body>
 </html>

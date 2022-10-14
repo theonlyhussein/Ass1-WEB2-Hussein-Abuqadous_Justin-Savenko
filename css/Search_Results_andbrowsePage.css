@@ -47,10 +47,26 @@ a {
 tr{
     margin: 50px;
 }
-a:active{
-background-color: white;
-color:black;
+
+
+.subtitle{
+    align-content: right;
+    color: yellow;
 }
-
-
-  
+footer{
+    bottom: 0px;
+    left: 0px;
+    color: yellow;
+}
+a:link{
+    color: #f5f5f5;
+}
+a:visited{
+    color: green;
+}
+a:hover{
+    color: rgb(106, 106, 158);
+}
+a:active{
+    color: hotpink;
+}
