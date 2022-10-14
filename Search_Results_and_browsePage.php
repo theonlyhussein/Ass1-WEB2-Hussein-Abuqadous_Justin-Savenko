@@ -19,7 +19,7 @@
     if(empty($_GET ["title"]) && $_GET["artist"]=="0" 
     && $_GET["genre"] =="0" && empty($_GET["less_Year"]) 
     && empty($_GET["Greater_Year"]) && empty($_GET["Less_Popularity"]) && empty($_GET['Greater_Popularity'])){
-     echo "You have not serached anything go back";
+     echo "You have not searched anything go back to the previous page";
     }
     elseif (isset($_GET ["title"]) && $_GET["artist"]=="0" 
         && $_GET["genre"] =="0" && empty($_GET["less_Year"]) 
@@ -282,7 +282,8 @@
     echo"<th> </th>";
     echo"<th>  </th>";
     echo "</tr>";
-    foreach ($data as $row) { 
+    foreach ($data as $row) {
+        
            echo "<tr>";
            echo "<td id='title'>".$row['title']."</td>";
            echo "<td class='artist'>".$row['artist_name']."</td>";

@@ -62,13 +62,13 @@ require_once('config.inc.php');
         <section class="container">
         <div>
         <label class="year"> Year</label><br>
-        <label class="year">Less</label> <input type="text" size="4" maxlength="4"  name="less_Year" id="less_Year"> <br>
-        <label class="year">Greater</label> <input type ="text" size="4" maxlength="4"  name="Greater_Year" id="greater_Year"> 
+        <label class="year">Less</label> <input type="text" size="4" maxlength="4" placeholder="4 digits max" pattern="[0-9]{4}" name="less_Year" id="less_Year"> <br>
+        <label class="year">Greater</label> <input type ="text" size="4" maxlength="4" placeholder="4 digits max"  pattern="[0-9]{4}"  name="Greater_Year" id="greater_Year"> 
         </div>
         <div>
         <label class="Popularity"> Popularity </label> <br>
-        <label class="Popularity"> Less </label> <input type ="text" size="4"  name="Less_Popularity" id="Less_Popularity"> <br>
-        <label class="Popularity">Greater</label> <input type ="text" size="4" name="Greater_Popularity" id="Greater_Popularity"> <br>
+        <label class="Popularity"> Less </label> <input type ="text" size="4"  placeholder="3 digits max"  pattern="[0-9]{3}"  name="Less_Popularity" id="Less_Popularity"> <br>
+        <label class="Popularity">Greater</label> <input type ="text" size="4" placeholder="3 digits max" name="Greater_Popularity"  pattern="[0-9]{3}"  id="Greater_Popularity"> <br>
         </div>
         </section>
         <input  type="submit" name="search" value="Search" >
