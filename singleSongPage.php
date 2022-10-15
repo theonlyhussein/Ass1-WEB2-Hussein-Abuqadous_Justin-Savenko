@@ -33,6 +33,9 @@ try {
         $row = $songs[$song_id - defaultSONG_id];
         $minutes = floor($row['duration'] / 60);
         $seconds = $row['duration'] % 60;
+        if($seconds <= 9) {
+            $seconds = sprintf('%02d', $seconds);
+        }
         echo songInfoHeader($row,$minutes,$seconds)?>
         </section>
         <div class="container">
@@ -173,3 +176,4 @@ try {
 </footer>
 </body>
 </html>
+
