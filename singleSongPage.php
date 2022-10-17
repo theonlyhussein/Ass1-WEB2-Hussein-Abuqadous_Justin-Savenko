@@ -10,6 +10,7 @@ try {
     $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
     $songsGateway = new SingleSongViewDB($conn);
     $songs = $songsGateway->getAll();
+    $songsGateway = null;
     $song_id = defaultSONG_id;
     if(isset($_GET['song_id']) && $_GET['song_id'] > 1000 && $_GET['song_id'] < 1318)
         $song_id = $_GET['song_id'];
