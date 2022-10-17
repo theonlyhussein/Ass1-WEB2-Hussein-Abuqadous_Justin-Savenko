@@ -39,9 +39,9 @@ class DatabaseHelper {
 class SingleSongViewDB {
     private static $baseSQL = "SELECT song_id, title, artists.artist_name, types.type_name, genres.genre_name, year, duration, bpm, energy, danceability, liveness, valence, acousticness, speechiness, popularity
                                 FROM songs
-                                INNER JOIN artists ON artists.artist_id = songs.artist_id
-                                INNER JOIN types ON types.type_id = artists.artist_type_id
-                                INNER JOIN genres ON genres.genre_id = songs.genre_id ";
+                                NATURAL JOIN artists 
+                                NATURAL JOIN types 
+                                NATURAL JOIN genres";
     public function __construct($connection) {
         $this->pdo = $connection;
     }
