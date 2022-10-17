@@ -24,11 +24,11 @@
           foreach($data as $row) {
             echo "<tr>";
             echo "<td id='title'>".$row['title']."</td>";
-            echo "<td class='artist'>".$row['artist_name']."</td>";
+            echo "<td class='artist'>".$row['artist']."</td>";
             echo "<td class='year'>".$row['year']."</td>";
-            echo "<td class='genre'>".$row['genre_name']."</td>";
+            echo "<td class='genre'>".$row['genre']."</td>";
             echo "<td class='popularity'>".$row['popularity']."</td>";
-            echo "<td class='favorites'> <a href=' removeFavourites.php?song_id=<?=". $row['song_id']. "?>' > Remove from Favorites   </td>";
+            echo "<td class='favorites'> <a href=' removeFavourites.php?song_id=". $row['song_id']. "' > Remove from Favorites   </td>";
             echo "<td class='favorites'> <a href=' singleSongPage.php?song_id=". $row['song_id']. "' > View  </td>";
             echo "</tr>";
           } echo "</table>" ?>

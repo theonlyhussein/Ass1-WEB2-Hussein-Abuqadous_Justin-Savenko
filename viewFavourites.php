@@ -17,11 +17,16 @@ $favourites = $_SESSION['favourites'];
         <title>COMP 3512 Assign1-Favourites</title>
         <meta charset=utf-8/>
         <p class="subtitle" align="right">Hussein Abuqadous & Justin Savenko</p>
+        <div class="favorites subtitle">
+        <a href="removeFavourites.php">
+                   Remove All Favorites
+                </a></div>
         <link rel="stylesheet" href="./css/viewFavourites.css">
     </head>
     <body>
         <h1>Session Favourites</h1>
-        <?php output($favourites)?>
+        <?php output($favourites)?> 
+       
 
         <footer>
   <div>COMP 3512 Fall 2022</div>

@@ -10,7 +10,7 @@ if (isset($_GET['song_id']) && ! empty($_GET['song_id'])) {
 
     $indexDelete = -1;
     for($i=0; $i<count($favourites); $i++) {
-        if ($favourites[$i][0] == $_GET['song_id']) {
+        if ($favourites[$i]['song_id'] == $_GET['song_id']) {
             $indexDelete = $i;
             break;
         }
