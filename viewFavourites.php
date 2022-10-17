@@ -20,7 +20,10 @@ $favourites = $_SESSION['favourites'];
         <div class="favorites subtitle">
         <a href="removeFavourites.php">
                    Remove All Favorites
-                </a></div>
+                </a>
+        <a href="Search_Results_and_browsePage.php">
+            Go to Browse Page
+        </a></div>
         <link rel="stylesheet" href="./css/viewFavourites.css">
     </head>
     <body>
