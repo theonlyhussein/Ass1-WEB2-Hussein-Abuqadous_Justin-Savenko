@@ -20,7 +20,7 @@ $favourites = $_SESSION['favourites'];
         <link rel="stylesheet" href="./css/viewFavourites.css">
     </head>
     <body>
-        <h1>Session Favorites</h1>
+        <h1>Session Favourites</h1>
         <?php output($favourites)?>
 
         <footer>
