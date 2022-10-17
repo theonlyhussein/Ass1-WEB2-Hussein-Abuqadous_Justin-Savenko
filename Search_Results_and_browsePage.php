@@ -283,7 +283,7 @@
     echo"<th>  </th>";
     echo "</tr>";
     foreach ($data as $row) {
-        
+
            echo "<tr>";
            echo "<td id='title'>".$row['title']."</td>";
            echo "<td class='artist'>".$row['artist_name']."</td>";
@@ -296,7 +296,7 @@
     }
     echo "</table>";
     }
-  
+
     
     ?>
     

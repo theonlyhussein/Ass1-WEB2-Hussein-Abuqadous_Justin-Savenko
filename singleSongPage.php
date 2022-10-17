@@ -38,7 +38,7 @@ try {
         }
         echo songInfoHeader($row,$minutes,$seconds)?>
         </section>
-        <?php include 'includes/progressBar.inc.php'; ?>
+        <?php progressBars($row) ?>
     </main>
 <footer>
   <div>COMP 3512 Fall 2022</div>
