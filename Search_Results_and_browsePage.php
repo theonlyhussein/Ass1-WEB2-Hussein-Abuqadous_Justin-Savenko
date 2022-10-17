@@ -85,10 +85,10 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
             $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM artists, songs, genres  
-                    WHERE  songs.genre_id = genres.genre_id 
-                    AND songs.artist_id = artists.artist_id 
-                    AND  title LIKE ?";
+                    FROM songs  
+                    NATURAL JOIN artists
+                    NATURAL JOIN genres 
+                    WHERE  title LIKE ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1, '%' . $songtitle . '%'); 
             $statement->execute();
@@ -108,10 +108,10 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
             $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
-                    FROM artists, songs, genres  
-                    WHERE  songs.genre_id = genres.genre_id 
-                    AND songs.artist_id = artists.artist_id 
-                    AND  artists.artist_id = ?";
+                    FROM songs  
+                    NATURAL JOIN artists
+                    NATURAL JOIN genres 
+                    WHERE  artist_id = ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1,  $artist ); 
             $statement->execute();
@@ -133,10 +133,10 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
             $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM artists, songs, genres  
-                    WHERE  songs.genre_id = genres.genre_id 
-                    AND songs.artist_id = artists.artist_id  
-                    AND  genres.genre_id =  ?";
+                    FROM songs  
+                    NATURAL JOIN artists
+                    NATURAL JOIN genres  
+                    WHERE  genre_id =  ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1,  $genre ); 
             $statement->execute();
@@ -155,10 +155,10 @@
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
             $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM artists, songs, genres  
-                    WHERE  songs.genre_id = genres.genre_id 
-                    AND songs.artist_id = artists.artist_id 
-                    AND year < ?";
+                    FROM songs  
+                    NATURAL JOIN artists
+                    NATURAL JOIN genres 
+                    WHERE year < ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1,  $less_year ); 
             $statement->execute();
@@ -178,10 +178,10 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
             $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
-                    FROM artists, songs, genres  
-                    WHERE  songs.genre_id = genres.genre_id 
-                    AND songs.artist_id = artists.artist_id 
-                    AND  year > ?";
+                    FROM songs  
+                    NATURAL JOIN artists
+                    NATURAL JOIN genres 
+                    WHERE  year > ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1,  $greater_year ); 
             $statement->execute();
@@ -201,9 +201,9 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
             $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM artists, songs, genres  
-                    WHERE  songs.genre_id = genres.genre_id 
-                    AND songs.artist_id = artists.artist_id 
+                    FROM songs  
+                    NATURAL JOIN artists
+                    NATURAL JOIN genres 
                     AND popularity < ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1,  $less_popularity ); 
@@ -224,10 +224,10 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, 
             PDO::ERRMODE_EXCEPTION); 
             $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
-                    FROM artists, songs, genres  
-                    WHERE  songs.genre_id = genres.genre_id 
-                    AND songs.artist_id = artists.artist_id 
-                    AND popularity > ?";
+                    FROM songs  
+                    NATURAL JOIN artists
+                    NATURAL JOIN genres 
+                    WHERE popularity > ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1,  $greaterpopularity ); 
             $statement->execute();
@@ -253,9 +253,9 @@
                     $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM artists, songs, genres  
-                    WHERE  songs.genre_id = genres.genre_id 
-                    AND songs.artist_id = artists.artist_id";
+                    FROM songs  
+                    NATURAL JOIN artists
+                    NATURAL JOIN genres";
                     $result = $pdo->query($sql);
                     $data = $result->fetchAll(PDO::FETCH_ASSOC);
                     $pdo =null;
