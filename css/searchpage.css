@@ -127,15 +127,7 @@ form{
 .Popularity{
     color:red;
 }
-input[type=submit]{
-    
-    padding: 10px;
-    border: 2px solid;
-    margin-left: 500px;
-    margin-top:20px;
-    font-size: 100%;
-    
-}
+
 .container{
     display: grid;
   grid-template-columns: auto auto;
@@ -153,7 +145,18 @@ footer{
     height: 100px;
 }
 
-
+input[type=submit]{
+    background-image: linear-gradient(to left, indigo, green, yellow, orange, red); 
+    padding: 10px;
+    border: 2px solid;
+    margin-left: 500px;
+    margin-top:20px;
+    font-size: 100%;
+    margin: auto;
+    display: block;
+    margin-bottom: 70px; 
+  }
+  
 
 
 
