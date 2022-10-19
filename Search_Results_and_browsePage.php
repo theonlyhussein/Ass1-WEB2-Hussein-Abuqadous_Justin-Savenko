@@ -9,7 +9,6 @@
 </head>
 <body>
 <section>
-    
 </section>
 <h1>Search Results</h1>
 <?php
@@ -101,7 +100,6 @@
         }
         } 
         
-    
     function findbyartist ($artist){
         try{
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
@@ -126,7 +124,6 @@
         }
         }
     
-    
     function findbygenre($genre){
         try{
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
@@ -146,7 +143,6 @@
         }
         catch(PDOException $e){
             die($e->getMessage()); 
-    
         } 
     }
    
@@ -168,7 +164,6 @@
         }
         catch(PDOException $e){
             die($e->getMessage()); 
-    
         } 
     }
     
@@ -191,7 +186,6 @@
         }
         catch(PDOException $e){
             die($e->getMessage()); 
-    
         } 
     }
    
@@ -214,7 +208,6 @@
         }
         catch(PDOException $e){
             die($e->getMessage()); 
-    
         } 
     }
     
@@ -237,17 +230,14 @@
         }
         catch(PDOException $e){
             die($e->getMessage()); 
-    
         } 
     }
-
 ?>
 <?php 
     if (!isset($_GET["search"])&&!isset($_GET["home_id"])) {
         echo '<form  method="post">';
         echo '<input id="showall" type="submit" name="showall"value="Show All">';
         echo '</form>';
-
             if(isset($_POST["showall"])){
             try{ 
                     $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
@@ -263,173 +253,9 @@
             }
             catch(PDOException $e){
                 die($e->getMessage()); 
-        
             } 
-        }
-        
-    }
-    else{
-        if(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 1){
-            try{
-            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql="SELECT genre_name, COUNT(song_id) as Num_of_songs
-                    FROM songs INNER JOIN genres USING(genre_id)
-                    GROUP BY genre_name
-                    ORDER BY COUNT(song_id) DESC
-                     LIMIT 10";
-            $result = $pdo->query($sql);
-            $data = $result->fetchAll(PDO::FETCH_ASSOC);
-            $pdo =null;
-            }
-            catch(PDOException $e){
-                die($e->getMessage()); 
-        
-            } 
-
-        }
-        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 2){
-            try{
-                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="SELECT artist_name , COUNT(song_id) as num_of_songs
-                    FROM songs INNER JOIN artists USING(artist_id)
-                    GROUP BY artist_name
-                    ORDER BY COUNT(song_id) DESC
-                    LIMIT 10";
-                $result = $pdo->query($sql);
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
-                $pdo =null;
-                output($data);
-                }
-                catch(PDOException $e){
-                    die($e->getMessage()); 
-            
-                } 
-        }
-        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 3){
-            try{
-                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="SELECT title, artist_name, popularity
-                    FROM songs INNER JOIN artists USING (artist_id)
-                    GROUP BY title
-                    ORDER BY popularity DESC
-                    LIMIT 10";
-                $result = $pdo->query($sql);
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
-                $pdo =null;
-                output($data);
-                }
-                catch(PDOException $e){
-                    die($e->getMessage()); 
-            
-                } 
-        }
-        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 4){
-            try{
-                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="SELECT artist_name , COUNT(song_id) as num_of_songs
-                    FROM songs INNER JOIN artists USING(artist_id)
-                    GROUP BY artist_name
-                    HAVING COUNT(song_id) = 1
-                    LIMIT 10";
-                $result = $pdo->query($sql);
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
-                $pdo =null;
-                output($data);
-                }
-                catch(PDOException $e){
-                    die($e->getMessage()); 
-            
-                } 
-        }
-        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 5){
-            try{
-                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity 
-                      FROM songs
-                      INNER JOIN artist ON artist.artist_id = songs.artist_id
-                      INNER JOIN genres ON genres.genre_id = songs.genre_id
-                      WHERE acousticness > 80
-                      ORDER BY duration desc
-                      LIMIT 10";
-                $result = $pdo->query($sql);
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
-                $pdo =null;
-                output($data);
-                }
-                catch(PDOException $e){
-                    die($e->getMessage()); 
-            
-                } 
-        }
-        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 6){
-            try{
-                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((danceability * 1.6) + (energy * 1.4)) AS calculation  
-                FROM songs
-                INNER JOIN artist ON artist.artist_id = songs.artist_id
-                INNER JOIN genres ON genres.genre_id = songs.genre_id
-                WHERE danceability > 80
-                ORDER BY calculation desc
-                LIMIT 10";
-                $result = $pdo->query($sql);
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
-                $pdo =null;
-                output($data);
-                }
-                catch(PDOException $e){
-                    die($e->getMessage()); 
-            
-                } 
-        }
-        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 7){
-            try{
-                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((energy * 1.3) + (valence * 1.6)) AS calculation  
-                FROM songs
-                INNER JOIN artist ON artist.artist_id = songs.artist_id
-                INNER JOIN genres ON genres.genre_id = songs.genre_id
-                WHERE bpm > 119 AND bpm < 126
-                ORDER BY calculation desc
-                LIMIT 10";
-                $result = $pdo->query($sql);
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
-                $pdo =null;
-                output($data);
-                }
-                catch(PDOException $e){
-                    die($e->getMessage()); 
-            
-                } 
-        }
-        else{
-            try{
-                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((acousticness * 0.8) + (100 - speechiness) + (100 - valence)) AS calculation  
-                FROM songs
-                INNER JOIN artist ON artist.artist_id = songs.artist_id
-                INNER JOIN genres ON genres.genre_id = songs.genre_id
-                WHERE bpm > 99 AND bpm < 116
-                ORDER BY calculation desc
-                LIMIT 10";
-                $result = $pdo->query($sql);
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
-                $pdo =null;
-                output($data);
-                }
-                catch(PDOException $e){
-                    die($e->getMessage()); 
-            
-                } 
-        }
-    }
+        }  
+    } 
     ?>
     <br>
     <?php
@@ -445,7 +271,6 @@
     echo"<th>  </th>";
     echo "</tr>";
     foreach ($data as $row) {
-
            echo "<tr>";
            echo "<td id='title'>".$row['title']."</td>";
            echo "<td class='artist'>".$row['artist_name']."</td>";
@@ -458,10 +283,7 @@
     }
     echo "</table>";
     }
-
-    
     ?>
-    
     <footer>
   <div>COMP 3512 Fall 2022</div>
   <div>Hussein Abuqadous & Justin Savenko &#169</div>
