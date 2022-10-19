@@ -273,11 +273,14 @@
             try{
             $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql=" ";
+            $sql="SELECT genre_name, COUNT(song_id) as Num_of_songs
+                    FROM songs INNER JOIN genres USING(genre_id)
+                    GROUP BY genre_name
+                    ORDER BY COUNT(song_id) DESC
+                     LIMIT 10";
             $result = $pdo->query($sql);
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
             $pdo =null;
-            output($data);
             }
             catch(PDOException $e){
                 die($e->getMessage()); 
@@ -289,7 +292,11 @@
             try{
                 $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="";
+                $sql="SELECT artist_name , COUNT(song_id) as num_of_songs
+                    FROM songs INNER JOIN artists USING(artist_id)
+                    GROUP BY artist_name
+                    ORDER BY COUNT(song_id) DESC
+                    LIMIT 10";
                 $result = $pdo->query($sql);
                 $data = $result->fetchAll(PDO::FETCH_ASSOC);
                 $pdo =null;
@@ -304,7 +311,11 @@
             try{
                 $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="";
+                $sql="SELECT title, artist_name, popularity
+                    FROM songs INNER JOIN artists USING (artist_id)
+                    GROUP BY title
+                    ORDER BY popularity DESC
+                    LIMIT 10";
                 $result = $pdo->query($sql);
                 $data = $result->fetchAll(PDO::FETCH_ASSOC);
                 $pdo =null;
@@ -319,7 +330,11 @@
             try{
                 $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="";
+                $sql="SELECT artist_name , COUNT(song_id) as num_of_songs
+                    FROM songs INNER JOIN artists USING(artist_id)
+                    GROUP BY artist_name
+                    HAVING COUNT(song_id) = 1
+                    LIMIT 10";
                 $result = $pdo->query($sql);
                 $data = $result->fetchAll(PDO::FETCH_ASSOC);
                 $pdo =null;
