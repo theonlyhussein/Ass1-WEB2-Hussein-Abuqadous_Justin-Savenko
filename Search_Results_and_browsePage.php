@@ -349,7 +349,13 @@
             try{
                 $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="";
+                $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity 
+                      FROM songs
+                      INNER JOIN artist ON artist.artist_id = songs.artist_id
+                      INNER JOIN genres ON genres.genre_id = songs.genre_id
+                      WHERE acousticness > 80
+                      ORDER BY duration desc
+                      LIMIT 10";
                 $result = $pdo->query($sql);
                 $data = $result->fetchAll(PDO::FETCH_ASSOC);
                 $pdo =null;
@@ -364,7 +370,13 @@
             try{
                 $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="";
+                $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((danceability * 1.6) + (energy * 1.4)) AS calculation  
+                FROM songs
+                INNER JOIN artist ON artist.artist_id = songs.artist_id
+                INNER JOIN genres ON genres.genre_id = songs.genre_id
+                WHERE danceability > 80
+                ORDER BY calculation desc
+                LIMIT 10";
                 $result = $pdo->query($sql);
                 $data = $result->fetchAll(PDO::FETCH_ASSOC);
                 $pdo =null;
@@ -379,7 +391,13 @@
             try{
                 $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="";
+                $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((energy * 1.3) + (valence * 1.6)) AS calculation  
+                FROM songs
+                INNER JOIN artist ON artist.artist_id = songs.artist_id
+                INNER JOIN genres ON genres.genre_id = songs.genre_id
+                WHERE bpm > 119 AND bpm < 126
+                ORDER BY calculation desc
+                LIMIT 10";
                 $result = $pdo->query($sql);
                 $data = $result->fetchAll(PDO::FETCH_ASSOC);
                 $pdo =null;
@@ -394,7 +412,13 @@
             try{
                 $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql="";
+                $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((acousticness * 0.8) + (100 - speechiness) + (100 - valence)) AS calculation  
+                FROM songs
+                INNER JOIN artist ON artist.artist_id = songs.artist_id
+                INNER JOIN genres ON genres.genre_id = songs.genre_id
+                WHERE bpm > 99 AND bpm < 116
+                ORDER BY calculation desc
+                LIMIT 10";
                 $result = $pdo->query($sql);
                 $data = $result->fetchAll(PDO::FETCH_ASSOC);
                 $pdo =null;
