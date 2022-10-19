@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 require_once 'includes/asg1-db-classes.inc.php';
-require_once 'includes/config.inc.php';
+require_once 'config.inc.php';
 require_once 'includes/functionCalls.inc.php';
 
 try {
@@ -11,9 +11,9 @@ try {
     $songsGateway = new SingleSongViewDB($conn);
     $songs = $songsGateway->getAll();
     $songsGateway = null;
-    $song_id = defaultSONG_id;
-    if(isset($_GET['song_id']) && $_GET['song_id'] > 1000 && $_GET['song_id'] < 1318)
-        $song_id = $_GET['song_id'];
+    if(!isset($_GET['song_id'])){
+        $indexDisplay = 0;
+    }
 }catch (Exception $e) { die($e->getMessage());}
 
 
@@ -31,15 +31,21 @@ try {
     <main>
         <section class="center">
         <?php
-        $row = $songs[$song_id - defaultSONG_id];
-        $minutes = floor($row['duration'] / 60);
-        $seconds = $row['duration'] % 60;
+        if(isset($_GET['song_id'])) {
+        for($i=0; $i<count($songs); $i++) {
+            if($songs[$i]['song_id'] == $_GET['song_id']) {
+                $indexDisplay = $i;
+                break;
+            }
+        }}
+        $minutes = floor($songs[$indexDisplay]['duration'] / 60);
+        $seconds = $songs[$indexDisplay]['duration'] % 60;
         if($seconds <= 9) {
             $seconds = sprintf('%02d', $seconds);
-        }
-        echo songInfoHeader($row,$minutes,$seconds)?>
+        } 
+        echo songInfoHeader($songs[$indexDisplay],$minutes,$seconds)?>
         </section>
-        <?php progressBars($row) ?>
+        <?php progressBars($songs[$indexDisplay]) ?>
     </main>
 <footer>
   <div>COMP 3512 Fall 2022</div>
