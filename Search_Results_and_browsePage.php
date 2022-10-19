@@ -243,7 +243,7 @@
 
 ?>
 <?php 
-    if (!isset($_GET["search"])) {
+    if (!isset($_GET["search"])&&!isset($_GET["home_id"])) {
         echo '<form  method="post">';
         echo '<input id="showall" type="submit" name="showall"value="Show All">';
         echo '</form>';
@@ -267,6 +267,129 @@
             } 
         }
         
+    }
+    else{
+        if(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 1){
+            try{
+            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql=" ";
+            $result = $pdo->query($sql);
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            $pdo =null;
+            output($data);
+            }
+            catch(PDOException $e){
+                die($e->getMessage()); 
+        
+            } 
+
+        }
+        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 2){
+            try{
+                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql="";
+                $result = $pdo->query($sql);
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $pdo =null;
+                output($data);
+                }
+                catch(PDOException $e){
+                    die($e->getMessage()); 
+            
+                } 
+        }
+        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 3){
+            try{
+                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql="";
+                $result = $pdo->query($sql);
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $pdo =null;
+                output($data);
+                }
+                catch(PDOException $e){
+                    die($e->getMessage()); 
+            
+                } 
+        }
+        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 4){
+            try{
+                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql="";
+                $result = $pdo->query($sql);
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $pdo =null;
+                output($data);
+                }
+                catch(PDOException $e){
+                    die($e->getMessage()); 
+            
+                } 
+        }
+        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 5){
+            try{
+                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql="";
+                $result = $pdo->query($sql);
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $pdo =null;
+                output($data);
+                }
+                catch(PDOException $e){
+                    die($e->getMessage()); 
+            
+                } 
+        }
+        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 6){
+            try{
+                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql="";
+                $result = $pdo->query($sql);
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $pdo =null;
+                output($data);
+                }
+                catch(PDOException $e){
+                    die($e->getMessage()); 
+            
+                } 
+        }
+        elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 7){
+            try{
+                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql="";
+                $result = $pdo->query($sql);
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $pdo =null;
+                output($data);
+                }
+                catch(PDOException $e){
+                    die($e->getMessage()); 
+            
+                } 
+        }
+        else{
+            try{
+                $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql="";
+                $result = $pdo->query($sql);
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $pdo =null;
+                output($data);
+                }
+                catch(PDOException $e){
+                    die($e->getMessage()); 
+            
+                } 
+        }
     }
     ?>
     <br>
