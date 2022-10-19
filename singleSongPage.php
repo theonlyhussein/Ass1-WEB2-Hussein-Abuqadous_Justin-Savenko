@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 require_once 'includes/asg1-db-classes.inc.php';
-require_once 'config.inc.php';
+require_once 'includes/config.inc.php';
 require_once 'includes/functionCalls.inc.php';
 
 try {
