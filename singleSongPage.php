@@ -32,12 +32,16 @@ try {
         <section class="center">
         <?php
         if(isset($_GET['song_id'])) {
+            $indexDisplay = -1;
         for($i=0; $i<count($songs); $i++) {
             if($songs[$i]['song_id'] == $_GET['song_id']) {
                 $indexDisplay = $i;
                 break;
             }
         }}
+        if($indexDisplay == -1) {
+            $indexDisplay = 0;
+        }
         $minutes = floor($songs[$indexDisplay]['duration'] / 60);
         $seconds = $songs[$indexDisplay]['duration'] % 60;
         if($seconds <= 9) {
