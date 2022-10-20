@@ -17,7 +17,7 @@ $favourites = $_SESSION['favourites'];
         <title>COMP 3512 Assign1-Favourites</title>
         <meta charset=utf-8/>
         <p class="subtitle" align="right">Hussein Abuqadous & Justin Savenko</p>
-        <div class="favorites subtitle">
+        <div class="favorites" align="right">
         <a href="removeFavourites.php">
                    Remove All Favorites
                 </a>
