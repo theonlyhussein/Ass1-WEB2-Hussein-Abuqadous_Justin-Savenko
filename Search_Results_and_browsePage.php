@@ -198,7 +198,7 @@
                     FROM songs  
                     NATURAL JOIN artists
                     NATURAL JOIN genres 
-                    AND popularity < ?";
+                    WHERE popularity < ?";
             $statement = $pdo->prepare($sql); 
             $statement->bindValue(1,  $less_popularity ); 
             $statement->execute();

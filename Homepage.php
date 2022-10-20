@@ -18,7 +18,10 @@
 </section>
 <section>
 <?php 
- if(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 1){
+session_start();
+require_once('config.inc.php'); 
+if (isset($_GET["home_id"])){
+ if(isset($_GET["home_id"]) && isset($_GET["home_id"] )== "1"){
     try{
     $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -30,14 +33,25 @@
     $result = $pdo->query($sql);
     $data = $result->fetchAll(PDO::FETCH_ASSOC);
     $pdo =null;
-    
+    echo "<table>";
+    echo "<tr>";
+    echo "<th class='genre'>Genre</th>";
+    echo "<th class='numberofsongs' >Number of Songs</th>";
+    echo "</tr>";
+    foreach($data as $row){
+        echo "<tr>";
+        echo "<td class='genre'>".$row['genre_name']."</td>";
+        echo "<td class='numberofsongs'".$row['Num_of_songs']."</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
     }
     catch(PDOException $e){
         die($e->getMessage()); 
     } 
 
 }
-elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 2){
+elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== "2"){
     try{
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -49,18 +63,29 @@ elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 2){
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo =null;
-        output($data);
+        echo "<table>";
+        echo "<tr>";
+        echo "<th class='artist'>Artist</th>";
+        echo "<th class='numberofsongs'>Number of Songs</th>";
+        echo "</tr>";
+        foreach($data as $row){
+            echo "<tr>";
+            echo "<td class='artist'>".$row['artist_name']."</td>";
+            echo "<td class='numberofsongs'".$row['num_of_songs']."</td>";
+            echo "</tr>"; 
+        }
+        echo "</table>";
         }
         catch(PDOException $e){
             die($e->getMessage()); 
     
         } 
 }
-elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 3){
+elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== "3"){
     try{
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql="SELECT title, artist_name, popularity
+        $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity 
             FROM songs INNER JOIN artists USING (artist_id)
             GROUP BY title
             ORDER BY popularity DESC
@@ -75,53 +100,69 @@ elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 3){
     
         } 
 }
-elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 4){
+elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== "4"){
     try{
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql="SELECT artist_name , COUNT(song_id) as num_of_songs
-            FROM songs INNER JOIN artists USING(artist_id)
-            GROUP BY artist_name
-            HAVING COUNT(song_id) = 1
-            LIMIT 10";
+        $sql="SELECT title,artist_name , COUNT(song_id) as num_of_songs, popularity
+                FROM songs INNER JOIN artists USING(artist_id)
+                GROUP BY artist_name
+                HAVING COUNT(song_id) = 1
+                ORDER BY popularity DESC
+                LIMIT 10";
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo =null;
-        output($data);
+        echo "<table>";
+        echo "<tr>";
+        echo "<th class='title'>Title</th>";
+        echo "<th class='artist'>Artist</th>";
+        echo "<th class='numberofsongs'>Number of Songs</th>";
+        echo "<th class='popularity'>Populartiy</th>";
+        echo "</tr>";
+        foreach($data as $row){
+            echo "<tr>";
+            echo "<td class='title'>".$row['Title']."</td>";
+            echo "<td class='artist'>".$row['artist_name']."</td>";
+            echo "<td class='numberofsongs'".$row['num_of_songs']."</td>";
+            echo "<td class='popularity'>".$row['popularity']."</td>";
+            echo "</tr>"; 
+        }
+        echo "</table>";
         }
         catch(PDOException $e){
             die($e->getMessage()); 
     
         } 
 }
-elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 5){
+elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== "5"){
     try{
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity 
+        $sql="SELECT title, artist.artist_name, year, genres.genre_name,popularity 
               FROM songs
-              INNER JOIN artist ON artist.artist_id = songs.artist_id
+              INNER JOIN artists ON artists.artist_id = songs.artist_id
               INNER JOIN genres ON genres.genre_id = songs.genre_id
-              WHERE acousticness > 80
+              WHERE acousticness > 40
               ORDER BY duration desc
               LIMIT 10";
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo =null;
         output($data);
-        }
+    }
         catch(PDOException $e){
             die($e->getMessage()); 
     
         } 
 }
-elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 6){
+elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== "6"){
     try{
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((danceability * 1.6) + (energy * 1.4)) AS calculation  
+        $sql="SELECT title, artists.artist_name, year, genres.genre_name,popularity, ((danceability * 1.6) + (energy * 1.4)) AS calculation  
         FROM songs
-        INNER JOIN artist ON artist.artist_id = songs.artist_id
+        INNER JOIN artists ON artists.artist_id = songs.artist_id
         INNER JOIN genres ON genres.genre_id = songs.genre_id
         WHERE danceability > 80
         ORDER BY calculation desc
@@ -130,19 +171,19 @@ elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 6){
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo =null;
         output($data);
-        }
+    }
         catch(PDOException $e){
             die($e->getMessage()); 
     
         } 
 }
-elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== 7){
+elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== "7"){
     try{
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((energy * 1.3) + (valence * 1.6)) AS calculation  
+        $sql="SELECT title, artists.artist_name, year, genres.genre_name,popularity, ((energy * 1.3) + (valence * 1.6)) AS calculation  
         FROM songs
-        INNER JOIN artist ON artist.artist_id = songs.artist_id
+        INNER JOIN artists ON artists.artist_id = songs.artist_id
         INNER JOIN genres ON genres.genre_id = songs.genre_id
         WHERE bpm > 119 AND bpm < 126
         ORDER BY calculation desc
@@ -161,9 +202,9 @@ else{
     try{
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql="SELECT title, artist.artist_name, year, genre.genre_name,popularity, ((acousticness * 0.8) + (100 - speechiness) + (100 - valence)) AS calculation  
+        $sql="SELECT title, artists.artist_name, year, genres.genre_name,popularity, ((acousticness * 0.8) + (100 - speechiness) + (100 - valence)) AS calculation  
         FROM songs
-        INNER JOIN artist ON artist.artist_id = songs.artist_id
+        INNER JOIN artists ON artists.artist_id = songs.artist_id
         INNER JOIN genres ON genres.genre_id = songs.genre_id
         WHERE bpm > 99 AND bpm < 116
         ORDER BY calculation desc
@@ -178,7 +219,29 @@ else{
     
         } 
 }
-
+}
+function output($data){
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>Title</th>";
+    echo "<th class='artist'>Artist</th>";
+    echo "<th class='year'>Year</th>";
+    echo "<th class='genre'>Genre</th>";
+    echo "<th class='popularity'>Populartiy</th>";
+    echo"<th> </th>";
+    echo"<th>  </th>";
+    echo "</tr>";
+    foreach ($data as $row) {
+           echo "<tr>";
+           echo "<td id='title'>".$row['title']."</td>";
+           echo "<td class='artist'>".$row['artist_name']."</td>";
+           echo "<td class='year'>".$row['year']."</td>";
+           echo "<td class='genre'>".$row['genre_name']."</td>";
+           echo "<td class='popularity'>".$row['popularity']."</td>";
+           echo "</tr>";
+    }
+    echo "</table>";
+    }
 
 ?>
 </section>
