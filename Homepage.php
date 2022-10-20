@@ -75,7 +75,7 @@ elseif(isset($_GET["home_id"]) && isset($_GET["home_id"] )== "3"){
         $mostPopularGateway = new MostPopularDB($conn);
         $mostPopular = $mostPopularGateway->getMostPopular();
         $mostPopularGateway = null;
-        output($data);
+        output($mostPopular);
         }
         catch(PDOException $e){
             die($e->getMessage()); 
