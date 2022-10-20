@@ -9,11 +9,13 @@
 </head>
 <body>
 <section>
+    
 </section>
 <h1>Search Results</h1>
 <?php
     session_start();
-    require_once('config.inc.php'); 
+    require_once('config.inc.php');
+    require_once 'includes/asg1-db-classes.inc.php'; 
     if(isset($_GET["search"])){
     if(empty($_GET ["title"]) && $_GET["artist"]=="0" 
     && $_GET["genre"] =="0" && empty($_GET["less_Year"]) 
@@ -81,42 +83,25 @@
 
     function findbytitle($songtitle){
         try{
-            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM songs  
-                    NATURAL JOIN artists
-                    NATURAL JOIN genres 
-                    WHERE  title LIKE ?";
-            $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1, '%' . $songtitle . '%'); 
-            $statement->execute();
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
-            $pdo = null;
-            return $data;
+            $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
+            $titleGateway = new BrowseByTitleDB($conn);
+            $titles = $titleGateway->getAll($songtitle);
+            $titleGateway = null;
+            return $titles;
         }
         catch(PDOException $e){
             die($e->getMessage()); 
         }
         } 
         
+    
     function findbyartist ($artist){
         try{
-            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
-            PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
-                    FROM songs  
-                    NATURAL JOIN artists
-                    NATURAL JOIN genres 
-                    WHERE  artist_id = ?";
-            $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1,  $artist ); 
-            $statement->execute();
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
-           
-            $pdo = null;
-            return $data;
+            $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
+            $artistGateway = new BrowseByArtistDB($conn);
+            $artists = $artistGateway->getAll($artist);
+            $artistGateway = null;
+            return $artists;
         }
         catch(PDOException $e){
             die($e->getMessage()); 
@@ -124,138 +109,99 @@
         }
         }
     
+
     function findbygenre($genre){
         try{
-            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
-            PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM songs  
-                    NATURAL JOIN artists
-                    NATURAL JOIN genres  
-                    WHERE  genre_id =  ?";
-            $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1,  $genre ); 
-            $statement->execute();
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
-            $pdo = null;
-            return $data;
+            $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
+            $genreGateway = new BrowseByGenreDB($conn);
+            $genres = $genreGateway->getAll($genre);
+            $genreGateway = null;
+            return $genres;
         }
         catch(PDOException $e){
             die($e->getMessage()); 
+    
         } 
     }
    
     function findbylessyear($less_year){
         try{
-            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM songs  
-                    NATURAL JOIN artists
-                    NATURAL JOIN genres 
-                    WHERE year < ?";
-            $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1,  $less_year ); 
-            $statement->execute();
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
-            $pdo = null;
-            return $data;
+            $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
+            $lessYearGateway = new BrowseByLessYearDB($conn);
+            $lessYears = $lessYearGateway->getAll($less_year);
+            $lessYearGateway = null;
+            return $lessYears;
         }
         catch(PDOException $e){
             die($e->getMessage()); 
+    
         } 
     }
     
     function findbygreateryear($greater_year){
         try{
-            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
-            PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
-                    FROM songs  
-                    NATURAL JOIN artists
-                    NATURAL JOIN genres 
-                    WHERE  year > ?";
-            $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1,  $greater_year ); 
-            $statement->execute();
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
-            $pdo = null;
-            return $data;
+            $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
+            $greaterYearGateway = new BrowseByGreatYearDB($conn);
+            $greatYears = $greaterYearGateway->getAll($greater_year);
+            $greaterYearGateway = null;
+            return $greatYears;
         }
         catch(PDOException $e){
             die($e->getMessage()); 
+    
         } 
     }
-   
+   // Neither of the popularity work trying to find out why (SQLSTATE error)
     function findbylesspopularity($less_popularity){
         try{
-            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
-            PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM songs  
-                    NATURAL JOIN artists
-                    NATURAL JOIN genres 
-                    WHERE popularity < ?";
-            $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1,  $less_popularity ); 
-            $statement->execute();
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
-            $pdo = null;
-            return $data;
+            $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
+            $lessPopularityGateway = new BrowseByLessPopularityDB($conn);
+            $lessPopularities = $lessPopularityGateway->getAll($less_popularity);
+            $lessPopularityGateway = null;
+            return $lessPopularities;
         }
         catch(PDOException $e){
             die($e->getMessage()); 
+    
         } 
     }
     
     function findbygreaterpopularity($greaterpopularity){
         try{
-            $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, 
-            PDO::ERRMODE_EXCEPTION); 
-            $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id 
-                    FROM songs  
-                    NATURAL JOIN artists
-                    NATURAL JOIN genres 
-                    WHERE popularity > ?";
-            $statement = $pdo->prepare($sql); 
-            $statement->bindValue(1,  $greaterpopularity ); 
-            $statement->execute();
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC); 
-            $pdo = null;
-            return $data;
+            $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
+            $greaterPopularityGateway = new BrowseByGreatPopularityDB($conn);
+            $greaterPopularities = $greaterPopularityGateway->getAll($greaterpopularity);
+            $greaterPopularityGateway = null;
+            return $greaterPopularities;
         }
         catch(PDOException $e){
             die($e->getMessage()); 
+    
         } 
     }
+
 ?>
 <?php 
-    if (!isset($_GET["search"])&&!isset($_GET["home_id"])) {
+    if (!isset($_GET["search"])) {
         echo '<form  method="post">';
         echo '<input id="showall" type="submit" name="showall"value="Show All">';
         echo '</form>';
+
             if(isset($_POST["showall"])){
             try{ 
-                    $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS); 
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $sql = "SELECT title, artist_name, year, genre_name, popularity, song_id
-                    FROM songs  
-                    NATURAL JOIN artists
-                    NATURAL JOIN genres";
-                    $result = $pdo->query($sql);
-                    $data = $result->fetchAll(PDO::FETCH_ASSOC);
-                    $pdo =null;
+                $conn = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
+                $dataGateway = new AllDB($conn);
+                $data = $dataGateway->getAll();
+                $dataGateway = null;
                     output($data);
             }
             catch(PDOException $e){
                 die($e->getMessage()); 
+        
             } 
-        }  
-    } 
+        }
+        
+    }
     ?>
     <br>
     <?php
@@ -271,6 +217,7 @@
     echo"<th>  </th>";
     echo "</tr>";
     foreach ($data as $row) {
+
            echo "<tr>";
            echo "<td id='title'>".$row['title']."</td>";
            echo "<td class='artist'>".$row['artist_name']."</td>";
@@ -283,7 +230,10 @@
     }
     echo "</table>";
     }
+
+    
     ?>
+    
     <footer>
   <div>COMP 3512 Fall 2022</div>
   <div>Hussein Abuqadous & Justin Savenko &#169</div>
