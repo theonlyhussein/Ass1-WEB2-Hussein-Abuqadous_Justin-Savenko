@@ -24,8 +24,17 @@ try {
 <html lang=en>
     <head>
         <title>COMP 3512 Assign1</title>
+        <nav>
+        <ul>
+        <li><div class="link"><a href="Homepage.php"> Home </a></div> </li>
+        <li><div class="link"><a href="Search page.php"> Search  </a></div> </li>
+        <li><div class="link"><a href="Search_Results_and_browsePage.php"> Browse  </a></div> </li>
+        <li><div class="link"><a href="viewFavourites.php"> Favourites  </a> </div> </li> 
+        </ul>
+    </nav>
         <p class="subtitle">Hussein Abuqadous & Justin Savenko</p>
         <link rel="stylesheet" href="./css/singleSongPage.css">
+    
     </head>
 <body>
     <main>
