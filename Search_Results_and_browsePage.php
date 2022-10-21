@@ -6,6 +6,14 @@
     <meta charset=utf-8>
     <p class="subtitle" align="right">Hussein Abuqadous & Justin Savenko</p>
     <link rel="stylesheet" href="./css/Search_Results_andbrowsePage.css">
+    <nav>
+        <ul>
+        <li><div class="link"><a href="Homepage.php"> Home   </a></div> </li>
+        <li><div class="link"><a href="Search page.php"> Search   </a></div> </li>
+        <li><div class="link"><a href="viewFavourites.php"> Favourites  </a> </div> </li>
+       <li><div class="link"><a href="singleSongPage.php"> Single Song</a></div> </li> 
+        </ul>
+    </nav>
 </head>
 <body>
 <section>

@@ -9,6 +9,14 @@ require_once('config.inc.php');
     <meta charset=utf-8>
     <link rel="stylesheet" href="./css/searchpage.css">
     <p class="subtitle" align="right">Hussein Abuqadous & Justin Savenko</p>
+    <nav>
+        <ul>
+        <li><div class="link"><a href="Homepage.php"> Home   </a></div> </li>
+        <li><div class="link"><a href="Search_Results_and_browsePage.php"> Browse  </a></div> </li>
+        <li><div class="link"><a href="viewFavourites.php"> Favourites  </a> </div> </li>
+       <li><div class="link"><a href="singleSongPage.php"> Single Song</a></div> </li> 
+        </ul>
+    </nav>
 </head>
 <body>
     <h1>Song Search</h1>
