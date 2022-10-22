@@ -1,6 +1,6 @@
 <?php  
 /* add your PHP code here */
-require_once('config.inc.php');                
+require_once('./includes/config.inc.php');                
 ?>
 <!DOCTYPE html>
 <html lang=en>
