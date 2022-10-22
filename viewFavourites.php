@@ -29,14 +29,12 @@ $favourites = $_SESSION['favourites'];
         <a href="removeFavourites.php">
                    Remove All Favorites
                 </a>
-        <a href="Search_Results_and_browsePage.php">
-            Go to Browse Page
-        </a></div>
+</div>
         <link rel="stylesheet" href="./css/viewFavourites.css">
     </head>
     <body>
         <h1>Session Favourites</h1>
-        <?php output($favourites)?> 
+        <?php favouriteOutput($favourites)?> 
        
 
         <footer>

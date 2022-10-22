@@ -1,3 +1,12 @@
+/* 
+Code within the Asterisks section was taken from the following source and adapted to meet assignment requirements
+This source also contains code used from the functionCalls.inc.php file function progressBars and was modified and adapted to meet assignment requirements
+
+Title: SVG Circle Progress Bar
+Author: Ekta Maurya
+Date: 2022
+Source Code: https://codepen.io/Curlmuhi/pen/qBZRWby
+*/
 *
 {
   margin:0;
@@ -136,6 +145,7 @@ svg circle:nth-child(2)
   stroke-dashoffset:calc(440 - (440 * var(--num)) / 100);
   stroke: var(--clr);
 }
+*
 .center{
     margin: auto;
     text-align: center;

@@ -27,10 +27,12 @@ try {
         <section class="subtitle">
         <p>Hussein Abuqadous & Justin Savenko</p>
         <nav>
-        <div><a href="Homepage.php"> Home </a></div> 
-        <div><a href="Search page.php"> Search  </a></div> 
-        <div><a href="Search_Results_and_browsePage.php"> Browse  </a></div> 
-        <div><a href="viewFavourites.php"> Favourites  </a> </div> 
+        <ul>
+        <li><div><a href="Homepage.php"> Home </a></div></li> 
+        <li><div><a href="Search page.php"> Search  </a></div></li> 
+        <li><div><a href="Search_Results_and_browsePage.php"> Browse  </a></div></li> 
+        <li><div><a href="viewFavourites.php"> Favourites  </a> </div></li> 
+        <ul>
         </nav>
         <link rel="stylesheet" href="./css/singleSongPage.css">
 </section>
