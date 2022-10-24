@@ -78,3 +78,28 @@ footer{
     height: 100px;
     color: yellow;
   }
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li{
+  display: inline-block;
+  margin:20px;
+  margin-top: 0px;
+  background-color: blue  ;
+  padding: 10px;
+  font-size: 20px;
+  width: 100px;
+  text-align: center;
+}
+.link a{
+  text-decoration: none;
+}
+.link a:link {
+  color: black;
+}
+.link a:visited{
+  color:white;
+}
