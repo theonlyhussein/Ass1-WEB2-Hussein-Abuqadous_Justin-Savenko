@@ -187,8 +187,10 @@ ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
+  color: white;
 }
 li{
+  color: white;
   display: inline-block;
   margin:20px;
   margin-top: 0px;
@@ -200,19 +202,23 @@ li{
 }
 .link a{
   text-decoration: none;
+  color: white;
 }
-.link a:link {
-  color: black;
+li  a:link {
+  color: white;
+  text-decoration: none;
 }
-.link a:visited{
+li a:visited{
   color:white;
+  text-decoration: none;
 }
-ul{
+.link ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
+  
 }
-li{
+.link li{
   display: inline-block;
   margin:20px;
   margin-top: 0px;
@@ -224,10 +230,4 @@ li{
 }
 .link a{
   text-decoration: none;
-}
-.link a:link {
-  color: black;
-}
-.link a:visited{
-  color:white;
 }

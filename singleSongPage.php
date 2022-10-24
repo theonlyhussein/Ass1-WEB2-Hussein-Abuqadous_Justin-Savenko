@@ -23,7 +23,7 @@ try {
 <!DOCTYPE html>
 <html lang=en>
     <head>
-        <title>COMP 3512 Assign1</title>
+        <title>COMP 3512 Assign1- Single Song Page</title>
         <section class="subtitle">
         <p>Hussein Abuqadous & Justin Savenko</p>
         <nav>

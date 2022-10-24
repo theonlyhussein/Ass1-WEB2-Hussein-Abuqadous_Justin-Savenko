@@ -5,7 +5,7 @@ require_once('./includes/config.inc.php');
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <title>Song Website Search page</title>
+    <title>COMP 3512 Assign1-Song  Search page</title>
     <meta charset=utf-8>
     <link rel="stylesheet" href="./css/searchpage.css">
     <p class="subtitle" align="right">Hussein Abuqadous & Justin Savenko</p>

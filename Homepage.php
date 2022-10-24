@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <title>Song Website Search page</title>
+    <title>COMP 3512 Assign1- Home page</title>
     <meta charset=utf-8>
 
     <p class="subtitle" align="right">Hussein Abuqadous & Justin Savenko</p>

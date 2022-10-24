@@ -1,3 +1,39 @@
+nav ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+nav li{
+  color: white;
+  display: inline-block;
+  margin:20px;
+  margin-top: 0px;
+  padding: 10px;
+  font-size: 20px;
+  width: 100px;
+  background-color: blue;
+  text-align: center;
+}
+.link a{
+  text-decoration: none;
+  color: white;
+}
+li  a:link {
+  color: white;
+  text-decoration: none;
+}
+li a:visited{
+  color:white;
+  text-decoration: none;
+}
+
+.link a{
+  text-decoration: none;
+}
+
+
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -33,30 +69,6 @@ table {
 
 tr{
     margin: 50px;
-}
-ul{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-li{
-  display: inline-block;
-  margin:20px;
-  margin-top: 0px;
-  background-color: blue  ;
-  padding: 10px;
-  font-size: 20px;
-  width: 100px;
-  text-align: center;
-}
-.link a{
-  text-decoration: none;
-}
-.link a:link {
-  color: black;
-}
-.link a:visited{
-  color:white;
 }
 
 
