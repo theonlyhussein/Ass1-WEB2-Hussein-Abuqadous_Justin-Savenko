@@ -35,7 +35,7 @@ require_once('./includes/config.inc.php');
                     $data = $result->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($data as $row) { 
                         echo '<option value="' . $row["artist_id"] . '">'; 
-                        echo utf8_encode($row["artist_name"]); 
+                        echo ($row["artist_name"]); 
                         echo '</option>'; 
                     } 
                     $pdo = null;
