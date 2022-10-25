@@ -70,8 +70,8 @@ require_once('./includes/config.inc.php');
         <section class="container">
         <div>
         <label class="year"> Year</label><br>
-        <label class="year">Less</label> <input type="text" size="4" maxlength="4" placeholder="4 digits" pattern="[0-9]" name="less_Year" id="less_Year"> <br>
-        <label class="year">Greater</label> <input type ="text" size="4" maxlength="4" placeholder="4 digits"  pattern="[0-9]"  name="Greater_Year" id="greater_Year"> 
+        <label class="year">Less</label> <input type="text" size="4"  placeholder="4 digits" pattern="[0-9]{4}" name="less_Year" id="less_Year"> <br>
+        <label class="year">Greater</label> <input type ="text" size="4"  placeholder="4 digits"  pattern="[0-9]{4}"  name="Greater_Year" id="greater_Year"> 
         </div>
         <div>
         <label class="Popularity"> Popularity </label> <br>
